@@ -1,12 +1,23 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"hash/crc32"
+	"time"
+)
 
 func main() {
-	test := map[string]string{}
-	for k, v := range test {
-		fmt.Println(k, v)
-		//ssssssss
-		///qqqq
+	t := time.Unix(0, 0)
+	fmt.Println(t)
+}
+
+func hash(account string) int64 {
+	hash := int64(crc32.ChecksumIEEE([]byte(account)))
+	if hash >= 0 {
+		return hash
 	}
+	if -hash >= 0 {
+		return -hash
+	}
+	return 0
 }
